@@ -32,7 +32,7 @@ namespace T1.SourceGeneratorKit.Builders
 				catch
 				{
 					cnt++;
-					if (cnt > 5)
+					if (cnt > 3)
 					{
 						done = true;
 					}
