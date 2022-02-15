@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using T1.SourceGeneratorKit.Extensions;
 
 namespace T1.SourceGeneratorKit.SyntaxFinders
 {

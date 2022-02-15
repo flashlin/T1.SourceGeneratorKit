@@ -2,33 +2,34 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using T1.SourceGeneratorKit.Extensions;
 
 namespace T1.SourceGeneratorKit
 {
 	public class SyntaxReceiver : ISyntaxContextReceiver
 	{
-		public List<MethodSyntaxInfo> Methods
+		public List<MethodDeclarationSyntax> Methods
 		{
 			get;
-		} = new List<MethodSyntaxInfo>();
+		} = new List<MethodDeclarationSyntax>();
 
 
-		public List<FieldSyntaxInfo> Fields
+		public List<FieldDeclarationSyntax> Fields
 		{
 			get;
-		} = new List<FieldSyntaxInfo>();
+		} = new List<FieldDeclarationSyntax>();
 
 
-		public List<PropertySyntaxInfo> Properties
+		public List<PropertyDeclarationSyntax> Properties
 		{
 			get;
-		} = new List<PropertySyntaxInfo>();
+		} = new List<PropertyDeclarationSyntax>();
 
 
-		public List<ClassSyntaxInfo> Classes
+		public List<ClassDeclarationSyntax> Classes
 		{
 			get;
-		} = new List<ClassSyntaxInfo>();
+		} = new List<ClassDeclarationSyntax>();
 
 
 		public virtual bool CollectMethodSymbol
@@ -89,15 +90,10 @@ namespace T1.SourceGeneratorKit
 		{
 			if (CollectMethodSymbol && ShouldCollectMethodDeclaration(methodDeclarationSyntax))
 			{
-				IMethodSymbol methodSymbol = model.GetDeclaredSymbol(methodDeclarationSyntax) as IMethodSymbol;
+				var methodSymbol = model.GetDeclaredSymbol(methodDeclarationSyntax) as IMethodSymbol;
 				if (methodSymbol != null && ShouldCollectMethodSymbol(methodSymbol))
 				{
-					Methods.Add(new MethodSyntaxInfo
-					{
-						Syntax = methodDeclarationSyntax,
-						Model = model,
-						Symbol = methodSymbol
-					});
+					Methods.Add(methodDeclarationSyntax);
 				}
 			}
 		}
@@ -119,12 +115,7 @@ namespace T1.SourceGeneratorKit
 				IFieldSymbol fieldSymbol = model.GetDeclaredSymbol(fieldDeclarationSyntax) as IFieldSymbol;
 				if (fieldSymbol != null && ShouldCollectFieldSymbol(fieldSymbol))
 				{
-					Fields.Add(new FieldSyntaxInfo
-					{
-						Syntax= fieldDeclarationSyntax,
-						Model= model,
-						Symbol = fieldSymbol
-					});
+					Fields.Add(fieldDeclarationSyntax);
 				}
 			}
 		}
@@ -146,12 +137,7 @@ namespace T1.SourceGeneratorKit
 				IPropertySymbol propertySymbol = model.GetDeclaredSymbol(propertyDeclarationSyntax) as IPropertySymbol;
 				if (propertySymbol != null && ShouldCollectPropertySymbol(propertySymbol))
 				{
-					Properties.Add(new PropertySyntaxInfo
-					{
-						Syntax = propertyDeclarationSyntax,
-						Model = model,
-						Symbol = propertySymbol
-					});
+					Properties.Add(propertyDeclarationSyntax);
 				}
 			}
 		}
@@ -173,12 +159,7 @@ namespace T1.SourceGeneratorKit
 				var namedTypeSymbol = model.GetDeclaredSymbol(classDeclarationSyntax) as INamedTypeSymbol;
 				if (namedTypeSymbol != null && ShouldCollectClassSymbol(namedTypeSymbol))
 				{
-					Classes.Add(new ClassSyntaxInfo
-					{
-						Syntax = classDeclarationSyntax,
-						Model = model,
-						Symbol = namedTypeSymbol
-					});
+					Classes.Add(classDeclarationSyntax);
 				}
 			}
 		}

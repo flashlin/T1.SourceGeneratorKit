@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using T1.SourceGeneratorKit.Extensions;
 
-namespace T1.SourceGeneratorKit
+namespace T1.SourceGeneratorKit.Extensions
 {
 	public static class SyntaxExtension
 	{
@@ -46,7 +47,7 @@ namespace T1.SourceGeneratorKit
 			var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
 			var syntax = memberAccess.ChildNodes().ToArray()[1];
 			var identifier = syntax as GenericNameSyntax;
-			return GetGenericNameArguments(identifier);
+			return identifier.GetGenericNameArguments();
 		}
 
 		public static IEnumerable<IdentifierNameSyntax> GetGenericNameArguments(this GenericNameSyntax syntax)
@@ -59,7 +60,7 @@ namespace T1.SourceGeneratorKit
 
 		public static INamespaceSymbol GetContainingNamespace(this IdentifierNameSyntax nameSyntax, Compilation compilation)
 		{
-			var typeInfo = GetTypeInfo(nameSyntax, compilation);
+			var typeInfo = nameSyntax.GetTypeInfo(compilation);
 			var namespaceName = ((INamedTypeSymbol)typeInfo.Type).ContainingNamespace;
 			return namespaceName;
 		}
@@ -73,7 +74,7 @@ namespace T1.SourceGeneratorKit
 
 		public static IEnumerable<IMethodSymbol> GetAllMethodsSymbols(this IdentifierNameSyntax nameSyntax, Compilation compilation)
 		{
-			var typeInfo = GetTypeInfo(nameSyntax, compilation);
+			var typeInfo = nameSyntax.GetTypeInfo(compilation);
 			return typeInfo.Type.GetMembers()
 				.Where(x => x.Kind == SymbolKind.Method)
 				.Cast<IMethodSymbol>();
@@ -85,11 +86,11 @@ namespace T1.SourceGeneratorKit
 			foreach (var methodSymbol in methodsSymbols)
 			{
 				var methodName = methodSymbol.Name;
-				if( methodName.StartsWith("get_"))
+				if (methodName.StartsWith("get_"))
 				{
 					continue;
 				}
-				if( methodName.StartsWith("set_"))
+				if (methodName.StartsWith("set_"))
 				{
 					continue;
 				}

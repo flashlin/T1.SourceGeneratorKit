@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace T1.CodeSourceGenerator
+namespace T1.SourceGeneratorKit.Extensions
 {
 	public static class CodeStringExtension
 	{

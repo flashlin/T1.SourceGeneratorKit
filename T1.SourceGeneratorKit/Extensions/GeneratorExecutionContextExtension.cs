@@ -4,7 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace T1.SourceGeneratorKit
+namespace T1.SourceGeneratorKit.Extensions
 {
 	public static class GeneratorExecutionContextExtension
 	{

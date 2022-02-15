@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace T1.SourceGeneratorKit
+namespace T1.SourceGeneratorKit.Extensions
 {
 	public static class MethodSymbolExtension
 	{
