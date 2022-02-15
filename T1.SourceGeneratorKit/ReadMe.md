@@ -15,7 +15,6 @@ dotnet add package Microsoft.CodeAnalysis.CSharp
 dotnet add package Microsoft.CodeAnalysis.Analyzers
 ```
 
-
 變更 Source Generator 專案中的類別，並不會導致 Generator 自動重新建置！
 你必須變更主要專案(ConsoleApp1)的原始碼，或是清空主要專案，才會讓 Source Generator 重新執行！
 

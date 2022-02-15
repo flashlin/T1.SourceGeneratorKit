@@ -19,7 +19,11 @@ namespace T1.SourceGeneratorKit.Builders
 
 		protected override void AddFile((string Filename, string Source) sourceFile)
 		{
-			bool done = false;
+			if (!Directory.Exists(_outputDirectoryRoot))
+			{
+				return;
+			}
+			var done = false;
 			while (!done)
 			{
 				int cnt = 0;
@@ -32,7 +36,7 @@ namespace T1.SourceGeneratorKit.Builders
 				catch
 				{
 					cnt++;
-					if (cnt > 3)
+					if (cnt > 2)
 					{
 						done = true;
 					}

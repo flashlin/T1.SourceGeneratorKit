@@ -8,11 +8,11 @@ using T1.SourceGeneratorKit.Builders;
 namespace T1.SourceGeneratorKit
 {
 	//[Generator]
-	public class BaseSourceGenerator : ISourceGenerator
+	public class SampleSourceGenerator : ISourceGenerator
 	{
 		private readonly ISourceBuilder _sourceBuilder;
 
-		public BaseSourceGenerator()
+		public SampleSourceGenerator()
 		{
 			_sourceBuilder = new SourceBuilder();
 		}

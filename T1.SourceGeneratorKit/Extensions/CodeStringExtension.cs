@@ -9,5 +9,10 @@ namespace T1.SourceGeneratorKit.Extensions
 		{
 			return string.Join($"{Environment.NewLine}", items);
 		}
+
+		public static string JoinWith<T>(this IEnumerable<T> items, string separate)
+		{
+			return string.Join(separate, items);
+		}
 	}
 }
